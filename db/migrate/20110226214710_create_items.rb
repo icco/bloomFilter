@@ -5,7 +5,6 @@ class CreateItems < ActiveRecord::Migration
       t.string :title
       t.text :text
       t.integer :user
-      t.date :date
 
       t.timestamps
     end
