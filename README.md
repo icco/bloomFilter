@@ -38,7 +38,7 @@ As for notHn, I'm seriously worried about the "design by commitee" issues that c
 ## Data
 
  * Items
-   * a url, text, parent, a userid, and a date
+   * title, url, text, parent, a userid, and a date
    * if url, parent must be 0.
    * if url text must be null
    * if text, url must be null
