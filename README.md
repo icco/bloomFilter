@@ -14,7 +14,7 @@ There seems to be a pretty heavy debate on notHn whether or not to allow voting.
 
 Monetization? I'm thinking of using the same pay system that [pinboard.in][] uses. It seems to work, although I might put a ceiling on it...
 
-As for notHn, I'm seriously worried about the design by commitee issues that could come about. I'm going to implement this and throw the code at them, and see what they think.
+As for notHn, I'm seriously worried about the "design by commitee" issues that could come about. I'm going to implement this and throw the code at them, and see what they think.
 
 [Rails For Zombies]: http://railsforzombies.org
 [Al3x's Post]: http://al3x.net/2011/02/22/solving-the-hacker-news-problem.html
@@ -30,7 +30,7 @@ As for notHn, I'm seriously worried about the design by commitee issues that cou
  * show cliks and votes
  * show domain
  * show rules if you haven't posted in a month
-    * make rules short
+   * make rules short
  * comment on links
  * vote on links
  * promote highly technical content
