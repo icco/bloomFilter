@@ -1,4 +1,8 @@
 Bloomflower::Application.routes.draw do
+  resources :votes
+
+  resources :users
+
   resources :items
 
   root :to => "home#index"
