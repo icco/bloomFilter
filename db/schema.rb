@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110226214710) do
+ActiveRecord::Schema.define(:version => 20110228214553) do
 
   create_table "items", :force => true do |t|
     t.string   "url"
@@ -22,11 +22,17 @@ ActiveRecord::Schema.define(:version => 20110226214710) do
   end
 
   create_table "users", :force => true do |t|
+    t.string   "username"
+    t.string   "pw"
+    t.text     "about"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "votes", :force => true do |t|
+    t.integer  "direction"
+    t.integer  "item"
+    t.integer  "user"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
