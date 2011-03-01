@@ -14,8 +14,6 @@ There seems to be a pretty heavy debate on notHn whether or not to allow voting.
 
 Monetization? I'm thinking of using the same pay system that [pinboard.in][] uses. It seems to work, although I might put a ceiling on it...
 
-As for notHn, I'm seriously worried about the "design by commitee" issues that could come about. I'm going to implement this and throw the code at them, and see what they think.
-
 [Rails For Zombies]: http://railsforzombies.org
 [Al3x's Post]: http://al3x.net/2011/02/22/solving-the-hacker-news-problem.html
 [pinboard.in]: http://pinboard.in/about/
@@ -25,9 +23,9 @@ As for notHn, I'm seriously worried about the "design by commitee" issues that c
  * moderators
  * invite only?
    * benefit - helps limit users.
-   * hash of invitee and invitor
+   * hash of invitee and inviter
  * submit links
- * show cliks and votes
+ * show clicks and votes
  * show domain
  * show rules if you haven't posted in a month
    * make rules short
@@ -38,13 +36,14 @@ As for notHn, I'm seriously worried about the "design by commitee" issues that c
 ## Data
 
  * Items
-   * title, url, text, parent, a userid, and a date
+   * title, url, text, parent, a user_id, and a date
    * if url, parent must be 0.
    * if url text must be null
    * if text, url must be null
  * Users
-   * name, userid, date joined, email, hashed pw
+   * name, user_id, date joined, email, hashed pw
  * votes
-   * direction, item id, userid, date
+   * direction, item id, user_id, date
    * direction will probably be an enum `{ 0 => flag, 1 => promote }`
+      * What's the best way to deal with enums in rails?
 
