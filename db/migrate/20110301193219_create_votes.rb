@@ -2,7 +2,7 @@ class CreateVotes < ActiveRecord::Migration
   def self.up
     create_table :votes do |t|
       t.integer :direction
-      t.integer :item
+      t.integer :item_id
       t.integer :user_id
 
       t.timestamps

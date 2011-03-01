@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(:version => 20110228234648) do
 
   create_table "votes", :force => true do |t|
     t.integer  "direction"
-    t.integer  "item"
+    t.integer  "item_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"

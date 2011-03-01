@@ -2,10 +2,10 @@
 
 one:
   direction: 1
-  item: 1
+  item_id: 1
   user_id: 1
 
 two:
   direction: 1
-  item: 1
+  item_id: 1
   user_id: 1
