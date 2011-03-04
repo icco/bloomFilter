@@ -12,11 +12,18 @@ There seems to be a pretty heavy debate on notHn whether or not to allow voting.
  * User B sees the post and goes "this is hot shit". He nominates it for featuring.
  * If 10% of the user base (determined by users reputation) nominates the post, the post gets featured and User A gets x rep (I'm thinking 10).
 
+Another suggestion is that a user could follow other users:
+
+ * all posts submitted by followers are automatically put on the front page
+ * idea by [Petar Maymounkov][]
+   * side note, dude sounds crazy smart.
+
 Monetization? I'm thinking of using the same pay system that [pinboard.in][] uses. It seems to work, although I might put a ceiling on it...
 
 [Rails For Zombies]: http://railsforzombies.org
 [Al3x's Post]: http://al3x.net/2011/02/22/solving-the-hacker-news-problem.html
 [pinboard.in]: http://pinboard.in/about/
+[Petar Maymounkov]: http://popalg.org/curated-by-choice-part-1
 
 ## Features / Brainstorming
 
