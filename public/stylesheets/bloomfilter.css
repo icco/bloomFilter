@@ -1,0 +1,31 @@
+#main {
+   width: 1000px;
+   border: 1px #999 solid;
+   margin: 0 auto;
+   padding: 10px;
+}
+
+.title, .item_meta {
+   width: 800px;
+   margin-left: 10px;
+   margin-bottom: 0;
+   line-height: 1em;
+}
+
+.item_meta {
+   font-size: 0.7em;
+   margin-bottom: 5px;
+   margin-top: 1px;
+   padding-left: 20px;
+   padding-right: 0;
+   padding-top: 2px;
+}
+
+tr {
+   margin: 0;
+   padding: 0;
+}
+
+table {
+   padding: 10px;
+}

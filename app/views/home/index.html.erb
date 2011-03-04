@@ -1,7 +1,20 @@
 <h1>BloomFilter</h1>
 
-Hi there.
-
+<table>
+   <% @items.each do |item| %>
+      <tr>
+         <td class="title"><a href="<%= item.url %>"><%= item.title %></a></td>
+      </tr>
+      <tr>
+         <td class="item_meta">
+            <%= link_to item.user.username, item.user %>
+            <%= link_to 'x Comments', item %>
+            <%= link_to 'Edit', edit_item_path(item) %>
+            <%= link_to 'Destroy', item, :confirm => 'Are you sure?', :method => :delete %>
+         </td>
+      </tr>
+   <% end %>
+</table>
 
 <ul>
    <li><%= link_to 'Items', items_path %></li>
