@@ -8,6 +8,10 @@
    </head>
    <body>
       <div id="main">
+         <ul class="menu">
+            <%= render 'devise/menu/registration_items' %>
+            <%= render 'devise/menu/login_items' %>
+         </ul>
          <%= yield %>
       </div>
    </body>

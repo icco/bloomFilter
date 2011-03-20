@@ -1,83 +1,56 @@
 class UsersController < ApplicationController
-  # GET /users
-  # GET /users.xml
-  def index
-    @users = User.all
+   load_and_authorize_resource
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @users }
-    end
-  end
+   def index
+      @users = User.all
+   end
 
-  # GET /users/1
-  # GET /users/1.xml
-  def show
-    @user = User.find(params[:id])
+   def show
+      @user = User.find(params[:id])
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @user }
-    end
-  end
+      respond_to do |format|
+         format.html # show.html.erb
+         format.json { render :json => @user }
+      end
+   end
 
-  # GET /users/new
-  # GET /users/new.xml
-  def new
-    @user = User.new
+   def new
+      @user = User.new
+   end
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @user }
-    end
-  end
+   # GET /users/1/edit
+   def edit
+      @user = User.find(params[:id])
+   end
 
-  # GET /users/1/edit
-  def edit
-    @user = User.find(params[:id])
-  end
-
-  # POST /users
-  # POST /users.xml
-  def create
-    @user = User.new(params[:user])
-
-    respond_to do |format|
+   def create
+      @user = User.new(params[:user])
       if @user.save
-        format.html { redirect_to(@user, :notice => 'User was successfully created.') }
-        format.xml  { render :xml => @user, :status => :created, :location => @user }
+         flash[:notice] = "Successfully created User." 
+         redirect_to root_path
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+         render :action => 'new'
       end
-    end
-  end
+   end
 
-  # PUT /users/1
-  # PUT /users/1.xml
-  def update
-    @user = User.find(params[:id])
+   def update
+      @user = User.find(params[:id])
+      params[:user].delete(:password) if params[:user][:password].blank?
+      params[:user].delete(:password_confirmation) if params[:user][:password].blank? and params[:user][:password_confirmation].blank?
 
-    respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
-        format.xml  { head :ok }
+         flash[:notice] = "Successfully updated User."
+         redirect_to root_path
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+         render :action => 'edit'
       end
-    end
-  end
+   end
 
-  # DELETE /users/1
-  # DELETE /users/1.xml
-  def destroy
-    @user = User.find(params[:id])
-    @user.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(users_url) }
-      format.xml  { head :ok }
-    end
-  end
+   def destroy
+      @user = User.find(params[:id])
+      if @user.destroy
+         flash[:notice] = "Successfully deleted User."
+         redirect_to root_path
+      end
+   end
 end
