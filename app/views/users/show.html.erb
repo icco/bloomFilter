@@ -12,9 +12,11 @@
 
 <p>
   <b>About:</b>
+  <p>
   <%= @user.about %>
+  </p>
 </p>
 
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to('Edit', edit_user_registration_path) if current_user == @user %>
 <%= link_to 'Back', users_path %>

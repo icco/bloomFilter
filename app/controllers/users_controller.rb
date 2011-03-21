@@ -18,11 +18,6 @@ class UsersController < ApplicationController
       @user = User.new
    end
 
-   # GET /users/1/edit
-   def edit
-      @user = User.find(params[:id])
-   end
-
    def create
       @user = User.new(params[:user])
 
