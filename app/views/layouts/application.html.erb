@@ -12,6 +12,9 @@
             <%= render 'devise/menu/registration_items' %>
             <%= render 'devise/menu/login_items' %>
          </ul>
+         
+         <h1><%= link_to_unless_current 'BloomFilter', root_url %></h1>
+
          <%= yield %>
       </div>
    </body>

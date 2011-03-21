@@ -14,6 +14,14 @@ class UsersController < ApplicationController
       end
    end
 
+   def edit
+      redirect_to edit_user_registration_path
+   end
+
+   def update
+      redirect_to edit_user_registration_path
+   end
+
    def new
       @user = User.new
    end
@@ -26,19 +34,6 @@ class UsersController < ApplicationController
          redirect_to root_path
       else
          render :action => 'new'
-      end
-   end
-
-   def update
-      @user = User.find(params[:id])
-      params[:user].delete(:password) if params[:user][:password].blank?
-      params[:user].delete(:password_confirmation) if params[:user][:password].blank? and params[:user][:password_confirmation].blank?
-
-      if @user.update_attributes(params[:user])
-         flash[:notice] = "Successfully updated User."
-         redirect_to root_path
-      else
-         render :action => 'edit'
       end
    end
 
