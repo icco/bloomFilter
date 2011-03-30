@@ -9,8 +9,6 @@ Bloomflower::Application.routes.draw do
 
   resources :users
 
-  resources :items
-
   root :to => "home#index"
   get "home/index"
 end
