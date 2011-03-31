@@ -8,8 +8,9 @@
   <b>Url:</b>
   <%= @item.url %>
 </p>
+<% end %>
 
-<% elsif @item.text != ""%>
+<% if @item.text != ""%>
 <p>
   <b>Text:</b>
   <%= @item.text %>

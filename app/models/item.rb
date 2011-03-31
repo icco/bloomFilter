@@ -4,7 +4,7 @@ class Item < ActiveRecord::Base
    has_ancestry
 
    def comments
-      return self.children
+      return self.descendants
    end
 
    def vote direction, user

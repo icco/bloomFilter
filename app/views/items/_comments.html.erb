@@ -4,9 +4,9 @@
       <p>
         <%= item.text %>
         <br />
-        By: <%= link_to item.user.username, item.user %>
+        By: <%= link_to item.user.username, item.user %> <%= link_to 'Reply', item %>
       </p>
    </div>
-<% end %>
+<% end if item.has_children? %>
 
 <%= render 'comment' %>
