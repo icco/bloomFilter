@@ -5,7 +5,8 @@
       </tr>
       <tr>
          <td class="item_meta">
-            <%= link_to 'Vote', vote_path(item) %>
+            <%= link_to 'Vote', vote_up_path(item) %>
+            <%= link_to 'Flag', vote_flag_path(item) %>
             <%= link_to item.user.username, item.user %>
             <%= link_to 'x Comments', item %>
             <%= link_to 'Edit', edit_item_path(item) %>

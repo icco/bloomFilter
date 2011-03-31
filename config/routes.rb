@@ -1,14 +1,14 @@
 Bloomflower::Application.routes.draw do
-  devise_for :users
-  devise_scope :user do
-     get '/login' => 'devise/sessions#new'
-     get '/logout' => 'devise/sessions#destroy'
-  end
+   devise_for :users do
+      get '/login' => 'devise/sessions#new'
+      get '/logout' => 'devise/sessions#destroy'
+   end
 
-  resources :votes
+   resources :items
+   resources :users
 
-  resources :users
+   match "/vote/:id/up" => "votes#up"
+   match "/vote/:id/flag" => "votes#flag"
 
-  root :to => "home#index"
-  get "home/index"
+   root :to => "home#index"
 end
