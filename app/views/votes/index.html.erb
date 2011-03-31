@@ -1,0 +1,20 @@
+<h1>Listing votes</h1>
+
+<table>
+   <tr>
+      <th>Direction</th>
+      <th>Item</th>
+      <th>User</th>
+      <th></th>
+      <th></th>
+      <th></th>
+   </tr>
+
+   <% @votes.each do |vote| %>
+      <tr>
+         <td><%= vote.direction %></td>
+         <td><%= vote.item_id %></td>
+         <td><%= vote.user_id %></td>
+      </tr>
+   <% end %>
+</table>

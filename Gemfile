@@ -16,6 +16,9 @@ gem 'aws-s3', :require => 'aws/s3'
 gem 'devise'
 gem 'cancan'
 
+# For item tree
+gem 'ancestry'
+
 group :development, :test do
   #gem 'webrat'
   gem 'heroku'

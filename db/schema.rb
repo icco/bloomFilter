@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110331061606) do
+ActiveRecord::Schema.define(:version => 20110331064827) do
 
   create_table "items", :force => true do |t|
     t.string   "url"
@@ -19,8 +19,10 @@ ActiveRecord::Schema.define(:version => 20110331061606) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "item_id"
+    t.string   "ancestry"
   end
+
+  add_index "items", ["ancestry"], :name => "index_items_on_ancestry"
 
   create_table "users", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
