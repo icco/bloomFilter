@@ -1,10 +1,30 @@
 class Item < ActiveRecord::Base
+   # So we can user url_for
+   include Rails.application.routes.url_helpers
+
+   # defines relationships.
    belongs_to :user
    has_many :votes
    has_ancestry
 
    def comments
       return self.descendants
+   end
+
+
+   def base_uri
+      item_path(self)
+   end
+
+   def url
+      if super != ""
+         u = super
+      else
+         u = self.base_uri
+      end
+
+      puts u.inspect
+      return u
    end
 
    def vote direction, user
