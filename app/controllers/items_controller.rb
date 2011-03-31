@@ -41,7 +41,11 @@ class ItemsController < ApplicationController
 
       respond_to do |format|
          if @item.save
-            format.html { redirect_to(@item, :notice => 'Item was successfully created.') }
+            if @item.root?
+               format.html { redirect_to(@item, :notice => 'Item was successfully created.') }
+            else
+               format.html { redirect_to(@item.parent, :notice => 'Comment was successfully created.') }
+            end
          else
             format.html { render :action => "new" }
          end

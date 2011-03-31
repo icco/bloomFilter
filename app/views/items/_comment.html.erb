@@ -1,0 +1,14 @@
+<%
+   # Set heirarchy.
+   @child = Item.new
+   @child.parent = @item
+%>
+<%= form_for(@child) do |f| %>
+   <%= f.text_area :text %>
+
+   <%= f.hidden_field :ancestry%>
+
+   <div class="actions">
+      <%= f.submit %>
+   </div>
+<% end %>

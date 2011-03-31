@@ -1,0 +1,12 @@
+<% item = @item if item.nil? %>
+<% item.children.each do |item| %>
+   <div style="margin-left: 10px;">
+      <p>
+        <%= item.text %>
+        <br />
+        By: <%= link_to item.user.username, item.user %>
+      </p>
+   </div>
+<% end %>
+
+<%= render 'comment' %>
