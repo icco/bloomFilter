@@ -1,25 +1,27 @@
 class VotesController < ApplicationController
-  # GET /votes
-  def index
-    @votes = Vote.all
+   before_filter :authenticate_user!
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @votes }
-    end
-  end
+   # GET /votes
+   def index
+      @votes = Vote.all
 
-  def up
-     @item = Item.find(params[:id])
-     @item.vote('up', current_user)
+      respond_to do |format|
+         format.html # index.html.erb
+         format.xml  { render :xml => @votes }
+      end
+   end
 
-     redirect_to @item
-  end
+   def up
+      @item = Item.find(params[:id])
+      @item.vote('up', current_user)
 
-  def flag
-     @item = Item.find(params[:id])
-     @item.vote('flag', current_user)
+      redirect_to @item
+   end
 
-     redirect_to @item
-  end
+   def flag
+      @item = Item.find(params[:id])
+      @item.vote('flag', current_user)
+
+      redirect_to @item
+   end
 end

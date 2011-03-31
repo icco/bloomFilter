@@ -1,4 +1,6 @@
 class ItemsController < ApplicationController
+   before_filter :authenticate_user!
+
    # GET /items
    def index
       @items = Item.all
