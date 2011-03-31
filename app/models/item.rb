@@ -3,6 +3,10 @@ class Item < ActiveRecord::Base
    has_many :votes
    has_ancestry
 
+   def comments
+      return self.children
+   end
+
    def vote direction, user
       vote = Vote.new
       vote.item = self

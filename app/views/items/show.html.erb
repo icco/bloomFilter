@@ -1,25 +1,27 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Url:</b>
-  <%= @item.url %>
-</p>
-
 <p>
   <b>Title:</b>
   <%= @item.title %>
 </p>
 
+<% if @item.url != "" %>
+<p>
+  <b>Url:</b>
+  <%= @item.url %>
+</p>
+
+<% elsif @item.text != ""%>
 <p>
   <b>Text:</b>
   <%= @item.text %>
 </p>
+<% end %>
 
 <p>
   <b>User:</b>
-  <%= @item.user_id %>
+  <%= link_to @item.user.username, @item.user %>
 </p>
 
+Comment form should go here....
 
 <%= link_to 'Edit', edit_item_path(@item) %> |
 <%= link_to 'Back', items_path %>
