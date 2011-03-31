@@ -7,8 +7,8 @@ Bloomflower::Application.routes.draw do
    resources :items
    resources :users
 
-   match "/vote/:id/up" => "votes#up"
-   match "/vote/:id/flag" => "votes#flag"
+   match "/vote/:id/up" => "votes#up", :as => 'vote_up'
+   match "/vote/:id/flag" => "votes#flag", :as => 'vote_flag'
 
    root :to => "home#index"
 end
