@@ -8,14 +8,18 @@
    </head>
    <body>
       <div id="main">
-         <ul class="menu">
-            <%= render 'devise/menu/registration_items' %>
-            <%= render 'devise/menu/login_items' %>
-         </ul>
-         
-         <p id="notice"><%= notice %></p>
+         <div class="menu">
+            <h1>BloomFilter</h1>
+            <ul>
+               <li><%= link_to_unless_current 'home', root_url %></li>
+               <li><%= link_to_unless_current 'new', items_path %></li>
+               <li><%= link_to_unless_current 'users', users_path %></li>
+               <%= render 'devise/menu/login_items' %>
+               <%= render 'devise/menu/registration_items' %>
+            </ul>
+         </div>
 
-         <h1><%= link_to_unless_current 'BloomFilter', root_url %></h1>
+         <p id="notice"><%= notice %></p>
 
          <%= yield %>
       </div>

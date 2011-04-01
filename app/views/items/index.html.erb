@@ -1,29 +1,7 @@
-<h1>Listing items</h1>
+<h1>Listing newest posts</h1>
 
-<table>
-  <tr>
-    <th>Url</th>
-    <th>Title</th>
-    <th>Text</th>
-    <th>User</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<%= render 'items', :locals => { :items => @items } %>
 
-<% @items.each do |item| %>
-  <tr>
-    <td><%= item.url %></td>
-    <td><%= item.title %></td>
-    <td><%= item.text %></td>
-    <td><%= link_to item.user.username, item.user %></td>
-    <td><%= link_to 'Show', item %></td>
-    <td><%= link_to 'Edit', edit_item_path(item) %></td>
-    <td><%= link_to 'Destroy', item, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Item', new_item_path %>
+<p>
+<%= link_to 'New post', new_item_path %>
+</p>

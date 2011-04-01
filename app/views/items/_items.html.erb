@@ -1,0 +1,5 @@
+<table>
+   <% @items.each do |item| %>
+      <%= render :partial => 'items/item', :locals => { :item => item } %>
+   <% end %>
+</table>

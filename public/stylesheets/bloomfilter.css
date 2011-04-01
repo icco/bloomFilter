@@ -30,12 +30,16 @@ table {
    padding: 10px;
 }
 
-ul.menu {
+.menu ul {
    list-style: none;
-   margin: 0 0 2em;
-   padding: 0;
+   margin: 0 0 1em;
+   padding: 5px 0 0 1.2em;
 }
 
-ul.menu li {
+.menu ul li {
    display: inline;
+}
+
+.menu h1 {
+   margin: 0;
 }
