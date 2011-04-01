@@ -26,6 +26,10 @@ tr {
    padding: 0;
 }
 
+td.vote a {
+   text-decoration: none;
+}
+
 table {
    padding: 10px;
 }
