@@ -22,7 +22,6 @@ class Item < ActiveRecord::Base
          u = self.base_uri
       end
 
-      puts u.inspect
       return u
    end
 
