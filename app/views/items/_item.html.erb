@@ -11,8 +11,10 @@
       <%= link_to 'Flag', vote_flag_path(item) %>
       <%= link_to item.user.username, item.user %>
       <%= link_to "#{item.children.count} Comments", item %>
+      <% if item.user == current_user %>
       <%= link_to 'Edit', edit_item_path(item) %>
       <%= link_to 'Destroy', item, :confirm => 'Are you sure?', :method => :delete %>
+      <% end %>
    </td>
 </tr>
 <% end %>
