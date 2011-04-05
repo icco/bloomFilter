@@ -37,7 +37,7 @@ class Item < ActiveRecord::Base
 
    def user_voted? user
       if user
-         return Vote.where({:item_id => self, :user_id => user}).count > 0
+         return Vote.where({:item_id => self, :user_id => user, :direction => 'up'}).count > 0
       else
          return false
       end
