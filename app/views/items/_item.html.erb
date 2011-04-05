@@ -8,12 +8,14 @@
 <tr>
    <td></td>
    <td class="item_meta">
-      <%= link_to 'Flag', vote_flag_path(item) %>
-      <%= link_to item.user.username, item.user %>
-      <%= link_to "#{item.children.count} Comments", item %>
+      By <%= link_to item.user.username, item.user %> &middot;
+      <%= link_to "#{item.children.count} Comments", item %> &middot;
+      <%= if item.user_flagged?(current_user) then 'Flagged' else link_to 'Flag', vote_flag_path(item) end %>
       <% if item.user == current_user %>
-      <%= link_to 'Edit', edit_item_path(item) %>
-      <%= link_to 'Destroy', item, :confirm => 'Are you sure?', :method => :delete %>
+         &middot;
+         <%= link_to 'Edit', edit_item_path(item) %>
+         &middot;
+         <%= link_to 'Destroy', item, :confirm => 'Are you sure?', :method => :delete %>
       <% end %>
    </td>
 </tr>
