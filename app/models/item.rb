@@ -31,9 +31,9 @@ class Item < ActiveRecord::Base
       vote.item = self
       vote.user = user
       vote.direction = direction
-      vote.save
 
-      return vote
+      # returns false if validations fail.
+      return vote.save
    end
 
    def user_voted? user

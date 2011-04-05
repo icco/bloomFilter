@@ -5,4 +5,6 @@ class User < ActiveRecord::Base
    attr_accessible :email, :username, :about, :password, :password_confirmation, :remember_me
    has_many :items
    has_many :votes
+
+   validates_uniqueness_of :email, :username
 end
