@@ -15,13 +15,13 @@ class VotesController < ApplicationController
       @item = Item.find(params[:id])
       @item.vote('up', current_user)
 
-      redirect_to @item
+      redirect_to root_url
    end
 
    def flag
       @item = Item.find(params[:id])
       @item.vote('flag', current_user)
 
-      redirect_to @item
+      redirect_to root_url
    end
 end
