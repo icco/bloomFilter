@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.5'
+gem 'rails'
 
 gem 'sqlite3'
 
@@ -20,6 +20,7 @@ gem 'cancan'
 gem 'ancestry'
 
 group :development, :test do
-  #gem 'webrat'
+  gem 'webrat'
   gem 'heroku'
+  gem 'timecop'
 end
