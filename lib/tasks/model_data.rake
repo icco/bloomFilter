@@ -8,7 +8,7 @@ namespace :data do
       Rake::Task["db:reset"].invoke
 
       # First build users
-      (0..1000).each do
+      (0..1000).each do |i|
          p = {
             "username" => Faker::Internet.user_name,
             "email" => Faker::Internet.email,
@@ -35,5 +35,11 @@ namespace :data do
 
       # Then have them post and vote
       # 5 posts a day, 10 votes a day
+
+      # read file, select 10 of the topics
+      # Store 10 topics in about field.
+      # iterate through a week, have users look at posts since they were last online, and vote on 10 they are interested in that they haven't voted on before
+      # Have them submit 5 posts they are interested in
+      # repeat for the next day. Make sure users are selected randomly.
    end
 end
