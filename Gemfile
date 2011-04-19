@@ -23,4 +23,5 @@ group :development, :test do
   gem 'webrat'
   gem 'heroku'
   gem 'timecop'
+  gem 'faker'
 end
