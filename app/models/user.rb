@@ -7,4 +7,12 @@ class User < ActiveRecord::Base
    has_many :votes
 
    validates_uniqueness_of :email, :username
+
+   def User.valid_email x
+      return !User.exists?(:email => x)
+   end
+
+   def User.valid_username x
+      return !User.exists?(:username => x)
+   end
 end
