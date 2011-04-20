@@ -35,8 +35,11 @@ namespace :data do
 
       # Then have them post and vote
       # 5 posts a day, 10 votes a day
+      User.find(:all, :order => "date").each do |user|
+         p user
+      end
 
-      # read file, select 10 of the topics
+      # select 10 topics
       # Store 10 topics in about field.
       # iterate through a week, have users look at posts since they were last online, and vote on 10 they are interested in that they haven't voted on before
       # Have them submit 5 posts they are interested in
