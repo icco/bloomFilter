@@ -1,13 +1,11 @@
 source 'http://rubygems.org'
 
 gem 'rails'
-
 gem 'sqlite3'
+gem 'json'
 
 # jquery
 gem 'jquery-rails'
-
-# gem 'ruby-debug19'
 
 gem 'nokogiri'
 gem 'aws-s3', :require => 'aws/s3'
