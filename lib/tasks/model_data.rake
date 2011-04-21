@@ -3,6 +3,7 @@ namespace :data do
    desc "Model an ideal environment."
    task :model => :environment do
       require 'faker'
+      require 'json'
 
       # Reset db
       Rake::Task["db:reset"].invoke
@@ -35,8 +36,12 @@ namespace :data do
 
       # Then have them post and vote
       # 5 posts a day, 10 votes a day
+      topics = (0..100).to_a
       User.find(:all, :order => "date").each do |user|
-         p user
+         u_topics = topics.sample(10)
+         user.about = u_topics.to_json 
+         user.save!
+
       end
 
       # select 10 topics
