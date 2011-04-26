@@ -11,7 +11,7 @@ namespace :data do
       Rake::Task["db:reset"].invoke
 
       # TIME TRAVEL.
-      Timecop.travel(Chronic.parse("-1 week"))
+      Timecop.travel(Chronic.parse("last week"))
 
       # First build users
       (0..1000).each do |i|
@@ -51,17 +51,30 @@ namespace :data do
 
       # iterate through a week
       (0..6).each do
-         Timecop.travel(Chronic.parse("+1 day"))
 
          # have users look at posts since they were last online
-         # gem 'chronic'
          User.find(:all, :limit => 50, :order => "random()").each do |user|
-            posts = user.items.where(":created_at > ?", user.last_sign_in_at)
+            topics = JSON.parse(user.about)
+
+            topics.sample(5).each do |topic|
+               uuid = (0..10).collect { (i = Kernel.rand(62); i += ((i < 10) ? 48 : ((i < 36) ? 55 : 61 ))).chr }.join
+               params = {
+                  :user_id => user.id,
+                  :url => "http://#{topic}.com/#{uuid}",
+                  :title => "User: #{user.id}, Topic: #{topic}"
+               }
+
+               i = Item.new params
+               i.save
+            end
+
+            posts = Item.where(":created_at > ? AND user_id != ?", user.last_sign_in_at, user.id)
             # vote on 10 they are interested in that they haven't voted on before
 
             p posts
          end
 
+         Timecop.travel(Chronic.parse("tomorrow"))
       end
       # Have them submit 5 posts they are interested in
       # repeat for the next day. Make sure users are selected randomly.
