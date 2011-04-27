@@ -47,6 +47,7 @@ namespace :data do
          u_topics = topics.sample(10)
          user.about = u_topics.to_json
          user.save!
+         print 't'
       end
 
       # iterate through a week
@@ -66,12 +67,15 @@ namespace :data do
 
                i = Item.new params
                i.save
+               print 'i'
             end
 
-            posts = Item.where(":created_at > ? AND user_id != ?", user.last_sign_in_at, user.id)
             # vote on 10 they are interested in that they haven't voted on before
-
-            p posts
+            posts = Item.roots.where("user_id != ?", user.id).keep_if {|post| post.user_voted? user }
+            posts.sample(5).each {|post|
+               post.vote 'up', user
+               print 'v'
+            }
          end
 
          Timecop.travel(Chronic.parse("tomorrow"))
