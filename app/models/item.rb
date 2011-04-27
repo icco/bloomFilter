@@ -7,6 +7,17 @@ class Item < ActiveRecord::Base
    has_many :votes
    has_ancestry
 
+   validates_uniqueness_of :url
+   after_validation_on_create :after_validation
+
+   # Doesn't work as wanted. But an idea.
+   def after_validation
+      if errors.on(:url).present?
+        item = Item.where(:url => self.url).first
+        item.vote 'up', self.user
+      end
+   end
+
    def comments
       return self.descendants
    end
