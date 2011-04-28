@@ -13,6 +13,8 @@ namespace :data do
       # TIME TRAVEL.
       Timecop.travel(Chronic.parse("last week"))
 
+      topics = (0..100).to_a
+
       # First build users
       (0..1000).each do |i|
          p = {
@@ -31,27 +33,18 @@ namespace :data do
             p["email"] = Faker::Internet.email
          end
 
-         u = User.new
-         u.email = p["email"]
-         u.username = p["username"]
-         u.password = p["password"]
+         u = User.new p
+         # select 10 topics
+         # Store 10 topics in about field.
+         u.about = topics.sample(10).sort.to_json
          u.save!
          u.errors.each{|e| p e}
          print '.'
       end
 
-      # select 10 topics
-      # Store 10 topics in about field.
-      topics = (0..100).to_a
-      User.find(:all, :order => "created_at").each do |user|
-         u_topics = topics.sample(10)
-         user.about = u_topics.to_json
-         user.save!
-         print 't'
-      end
-
       # iterate through a week
-      (0..6).each do
+      (1..7).each do |i|
+         puts "\nDay #{i} - #{Time.now}"
 
          # have users look at posts since they were last online
          User.find(:all, :limit => 50, :order => "random()").each do |user|
@@ -71,16 +64,24 @@ namespace :data do
             end
 
             # vote on 10 they are interested in that they haven't voted on before
-            posts = Item.roots.where("user_id != ?", user.id).keep_if {|post| post.user_voted? user }
-            posts.sample(5).each {|post|
-               post.vote 'up', user
-               print 'v'
+            posts = Item.roots.where("user_id != ?", user.id)
+            posts = posts.keep_if {|post| !post.user_voted? user }
+
+            voteCount = 0
+            posts.each {|post|
+               if voteCount <= 5
+                  topics.each {|t|
+                     if !%r{http://#{t}\.com/.*}.match(post.url).nil?
+                        post.vote 'up', user
+                        print 'v'
+                        voteCount += 1
+                     end
+                  }
+               end
             }
          end
 
          Timecop.travel(Chronic.parse("tomorrow"))
       end
-      # Have them submit 5 posts they are interested in
-      # repeat for the next day. Make sure users are selected randomly.
    end
 end
