@@ -6,7 +6,7 @@
    <td class="title"><%= link_to item.title, item.url %></td>
 </tr>
 <tr>
-   <td></td>
+   <td><%= item.votes.count %></td>
    <td class="item_meta">
       By <%= link_to item.user.username, item.user %> &middot;
       <%= link_to "#{item.children.count} Comments", item %> &middot;

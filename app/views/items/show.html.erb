@@ -8,6 +8,13 @@
 </p>
 <% end %>
 
+Voters: <% @item.votes.each do |vote| %>
+      <li style="margin: 0; padding: 2px; display: inline; list-style: none;" ><%= link_to vote.user.username, vote.user %></li>
+   <% end %>
+
+<p>
+</p>
+
 <%= render 'comments' %>
 
 <% if @item.user == current_user %>
