@@ -5,7 +5,7 @@ class Item < ActiveRecord::Base
    # defines relationships.
    belongs_to :user
    has_many :votes
-   has_ancestry
+   has_many :comments
 
    validates_uniqueness_of :url
    after_validation_on_create :after_validation
