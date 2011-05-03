@@ -18,10 +18,6 @@ class Item < ActiveRecord::Base
       end
    end
 
-   def comments
-      return self.descendants
-   end
-
    def base_uri
       item_path(self)
    end
