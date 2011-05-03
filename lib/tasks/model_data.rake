@@ -64,7 +64,7 @@ namespace :data do
             end
 
             # vote on 10 they are interested in that they haven't voted on before
-            posts = Item.roots.where("user_id != ?", user.id)
+            posts = Item.where("user_id != ?", user.id)
             posts = posts.keep_if {|post| !post.user_voted? user }
 
             voteCount = 0

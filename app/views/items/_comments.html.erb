@@ -1,12 +1,11 @@
-<% item = @item if item.nil? %>
-<% item.children.each do |item| %>
+<% @item.comments.each do |comment| %>
    <div style="margin-left: 10px;">
       <p>
-        <%= item.text %>
+        <%= comment.text %>
         <br />
-        By: <%= link_to item.user.username, item.user %> <%= link_to 'Reply', item %>
+        By: <%= link_to comment.user.username, comment.user %> <%= link_to 'Reply', comment %>
       </p>
    </div>
-<% end if item.has_children? %>
+<% end %>
 
 <%= render 'comment' %>
