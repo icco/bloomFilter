@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
 
    # GET /items
    def index
-      @items = Item.order(:created_at)
+      @items = Item.order("created_at DESC")
 
       respond_to do |format|
          format.html # index.html.erb

@@ -3,8 +3,7 @@
    @comment = Comment.new
    @comment.item = @item
 %>
-<%= form_for(@child) do |f| %>
-   <%= f.hidden_field :ancestry%>
+<%= form_for(@comment) do |f| %>
    <%= f.text_area :text, :size => "60x5" %>
 
    <div class="actions">
