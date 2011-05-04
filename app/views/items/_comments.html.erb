@@ -1,9 +1,9 @@
 <% @item.comments.each do |comment| %>
    <div style="margin-left: 10px;">
       <p>
-        <%= comment.text %>
-        <br />
-        By: <%= link_to comment.user.username, comment.user %> <%= link_to 'Reply', comment %>
+         <%= comment.text %>
+         <br />
+         By: <%= link_to comment.user.username, comment.user %> <%= comment.created_at.time_since %> <%= link_to 'Reply', comment %>
       </p>
    </div>
 <% end %>
