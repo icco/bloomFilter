@@ -4,6 +4,32 @@
    By: <%= link_to @comment.user.username, @comment.user %> <%= @comment.created_at.time_since %> <%= link_to 'Reply', @comment %>
 </p>
 
+<% @comment.children.each do |c| %>
+<p style="margin-left: 15px;">
+   <%= c.text %>
+   <br />
+   By: <%= link_to c.user.username, c.user %> <%= c.created_at.time_since %> <%= link_to 'Reply', c %>
+</p>
+<% end %>
 
-<%= link_to 'Edit', edit_comment_path(@comment) %> |
+<%
+   # Set heirarchy.
+   @new = Comment.new
+   @new.item = @comment.item
+   @new.user = current_user
+   @new.parent = @comment
+%>
+<%= form_for(@new) do |f| %>
+   <%= f.text_area :text, :size => "60x5" %>
+   <%= f.hidden_field :user_id %>
+   <%= f.hidden_field :item_id %>
+   <%= f.hidden_field :ancestry %>
+
+   <div class="actions">
+      <%= f.submit :value => 'Comment' %>
+   </div>
+<% end %>
+
+
+
 <%= link_to 'Back', @comment.item %>
