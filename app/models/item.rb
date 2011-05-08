@@ -57,4 +57,9 @@ class Item < ActiveRecord::Base
          return false
       end
    end
+
+   # this function returns the distance from another item.
+   def distance item
+
+   end
 end

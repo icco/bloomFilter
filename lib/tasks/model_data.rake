@@ -83,5 +83,8 @@ namespace :data do
 
          Timecop.travel(Chronic.parse("tomorrow"))
       end
+
+      # Print stats.
+      Rake::Task["data:stats"].invoke
    end
 end
