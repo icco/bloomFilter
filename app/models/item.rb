@@ -58,8 +58,15 @@ class Item < ActiveRecord::Base
       end
    end
 
+   def up_votes
+      item.votes.where(:direction => "up")
+   end
+
    # this function returns the distance from another item.
    def distance item
+      a_votes = self.up_votes.count
+      b_votes = item.up_votes.count
 
+      return (a_votes - b_votes).abs
    end
 end
