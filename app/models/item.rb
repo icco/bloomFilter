@@ -58,15 +58,26 @@ class Item < ActiveRecord::Base
       end
    end
 
-   def up_votes
-      item.votes.where(:direction => "up")
+   # this function returns the distance from another item.
+   #
+   # Original idea:
+   # * If we both voted for it, 0
+   # * If you submited it, and I voted for it, 1
+   # * If I voted, but you did not, -1
+   #
+   # Currently implemented as a count of number of voters we share
+   #
+   # TODO: Cache!
+   def distance item
+      return (self.voters.keys & item.voters.keys).count
    end
 
-   # this function returns the distance from another item.
-   def distance item
-      a_votes = self.up_votes.count
-      b_votes = item.up_votes.count
+   def voters
+      users = {}
+      self.votes.where(:direction => "up").each {|vote|
+         users[vote.user.id] = vote.user if users[vote.user.id].nil?
+      }
 
-      return (a_votes - b_votes).abs
+      return users
    end
 end
