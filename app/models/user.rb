@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
    has_many :items
    has_many :votes
 
+   has_many :likes, :class_name => "Item", :through => :votes, :source => :item, :conditions => "direction = 'up'", :order => "created_at DESC"
+
    validates_uniqueness_of :email, :username
 
    def User.valid_email x
