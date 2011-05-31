@@ -50,7 +50,7 @@ namespace :data do
          User.find(:all, :limit => 50, :order => "random()").each do |user|
             topics = JSON.parse(user.about)
 
-            topics.sample(5).each do |topic|
+            topics.sample(2).each do |topic|
                uuid = (0..10).collect { (i = Kernel.rand(62); i += ((i < 10) ? 48 : ((i < 36) ? 55 : 61 ))).chr }.join
                params = {
                   :user_id => user.id,
@@ -64,12 +64,12 @@ namespace :data do
             end
 
             # vote on 10 they are interested in that they haven't voted on before
-            posts = Item.where("user_id != ?", user.id)
+            posts = Item.where("user_id != ?", user.id).order("created_at DESC")
             posts = posts.keep_if {|post| !post.user_voted? user }
 
             voteCount = 0
             posts.each {|post|
-               if voteCount <= 5
+               if voteCount <= 15
                   topics.each {|t|
                      if !%r{http://#{t}\.com/.*}.match(post.url).nil?
                         post.vote 'up', user
@@ -83,6 +83,8 @@ namespace :data do
 
          Timecop.travel(Chronic.parse("tomorrow"))
       end
+
+      puts ""
 
       # Print stats.
       Rake::Task["data:stats"].invoke
