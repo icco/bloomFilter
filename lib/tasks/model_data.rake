@@ -63,22 +63,22 @@ namespace :data do
                print 'i'
             end
 
-            # vote on 10 they are interested in that they haven't voted on before
+            # vote on 50 they are interested in that they haven't voted on before
             posts = Item.where("user_id != ?", user.id).order("created_at DESC")
             posts = posts.keep_if {|post| !post.user_voted? user }
 
             voteCount = 0
-            posts.each {|post|
-               if voteCount <= 15
-                  topics.each {|t|
+            posts.each do |post|
+               if voteCount <= 50 and !post.user_voted? user
+                  topics.each do |t|
                      if !%r{http://#{t}\.com/.*}.match(post.url).nil?
                         post.vote 'up', user
                         print 'v'
                         voteCount += 1
                      end
-                  }
+                  end
                end
-            }
+            end
          end
 
          Timecop.travel(Chronic.parse("tomorrow"))
