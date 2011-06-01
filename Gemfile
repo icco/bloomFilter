@@ -18,9 +18,8 @@ gem 'cancan'
 # For item tree
 gem 'ancestry'
 
-group :development, :test do
-  gem 'webrat'
-  gem 'heroku'
-  gem 'timecop'
-  gem 'faker'
-end
+# For development.
+gem 'webrat'
+gem 'heroku'
+gem 'timecop'
+gem 'faker'
