@@ -1,21 +1,26 @@
 <p id="notice"><%= notice %></p>
 
+  <h3>Username:</h3>
 <p>
-  <b>Username:</b>
   <%= @user.username %>
 </p>
 
+  <h3>eMail</h3>
 <p>
-  <b>email:</b>
   <%= @user.email %>
 </p>
 
+<h3>About</h3>
 <p>
-  <b>About:</b>
-  <p>
-  <%= @user.about %>
-  </p>
+   <%= @user.about %>
 </p>
+
+<h3>User Likes</h3>
+<ul>
+<% @user.likes.each {|item| %>
+   <li><%= link_to item.title, item %></li>
+<% } %>
+</ul>
 
 
 <%= link_to('Edit', edit_user_registration_path) if current_user == @user %>
