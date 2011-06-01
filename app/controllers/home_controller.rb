@@ -41,6 +41,10 @@ class HomeController < ApplicationController
 
          @items = @items.sort {|a,b| b.created_at <=> a.created_at }
          @items = @items.slice(0..25)
+
+         if @items.count < 25
+            @items = @items.concat(Item.order("created_at DESC").limit(25-@items.count()))
+         end
       end
    end
 end

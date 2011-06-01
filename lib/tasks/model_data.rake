@@ -43,11 +43,11 @@ namespace :data do
       end
 
       # iterate through a week
-      (1..7).each do |i|
+      (1..3).each do |i|
          puts "\nDay #{i} - #{Time.now}"
 
          # have users look at posts since they were last online
-         User.find(:all, :limit => 50, :order => "random()").each do |user|
+         User.find(:all, :limit => 200, :order => "random()").each do |user|
             topics = JSON.parse(user.about)
 
             topics.sample(2).each do |topic|

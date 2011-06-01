@@ -8,11 +8,11 @@ class Item < ActiveRecord::Base
    has_many :comments
 
    validates_uniqueness_of :url
-   after_validation(:after_validation, :on => :create)
+   after_validation(Item.after_validation, :on => :create)
 
    # Doesn't work as wanted. But an idea.
-   def Item.after_validation
-      if errors.on(:url).present?
+   def Item.after_validation i
+      if i.errors.on(:url).present?
         item = Item.where(:url => self.url).first
         item.vote 'up', self.user
       end
