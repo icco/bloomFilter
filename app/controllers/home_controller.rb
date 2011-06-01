@@ -10,20 +10,22 @@ class HomeController < ApplicationController
 
          likes.each do |item1|
             recent.each do |item2|
-               id = ItemDistance.where({
-                  :item1_id => item1.id,
-                  :item2_id => item2.id,
-               }).first
-
-               if id.nil?
-                  id = ItemDistance.new({
+               if item1.distance(item2) != 0 and item1 != item2
+                  id = ItemDistance.where({
                      :item1_id => item1.id,
                      :item2_id => item2.id,
-                  })
-               end
+                  }).first
 
-               id.distance = item1.distance item2
-               id.save
+                  if id.nil?
+                     id = ItemDistance.new({
+                        :item1_id => item1.id,
+                        :item2_id => item2.id,
+                     })
+                  end
+
+                  id.distance = item1.distance item2
+                  id.save
+               end
             end
          end
 
