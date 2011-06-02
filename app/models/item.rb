@@ -7,6 +7,8 @@ class Item < ActiveRecord::Base
    has_many :votes
    has_many :comments
 
+   has_many :voters, :class_name => "User", :through => :votes, :source => :user, :conditions => "direction = 'up'"
+
    validates_uniqueness_of :url
    after_validation(Item.after_validation, :on => :create)
 
@@ -58,26 +60,42 @@ class Item < ActiveRecord::Base
       end
    end
 
-   # this function returns the distance from another item.
-   #
-   # Original idea:
-   # * If we both voted for it, 0
-   # * If you submited it, and I voted for it, 1
-   # * If I voted, but you did not, -1
-   #
-   # Currently implemented as a count of number of voters we share
-   #
+   # This function returns the euclidean distance in an N-dimensional space
+   # from another item.
    # TODO: Cache!
    def distance item
-      return (self.voters.keys & item.voters.keys).count
+      disance = 0 if self == item
+      id = ItemDistance.where({
+         :item1_id => self.id,
+         :item2_id => item.id,
+      }).first
+
+      if id.nil?
+         id = ItemDistance.new({
+            :item1_id => self.id,
+            :item2_id => item.id,
+         })
+      else
+         # An hour DB cache
+         distance = id.distance if Time.now - id.updated_at < 60*60
+      end
+
+      if distance.nil?
+         # this in reality is supposed to be sum(each dimmension (b-a)^2) but
+         # because the values are all one or zero, we can do this
+         diff = (self.voters.to_set - item.voters.keys.to_set).count
+         distance = Math.sqrt(diff)
+
+         id.distance = distance
+         id.save
+      end
+
+      return distance
    end
 
-   def voters
-      users = {}
-      self.votes.where(:direction => "up").each {|vote|
-         users[vote.user.id] = vote.user if users[vote.user.id].nil?
-      }
+   # TODO: Cache!
+   def similar
 
-      return users
+
    end
 end
