@@ -1,25 +1,26 @@
 source 'http://rubygems.org'
 
-gem 'rails'
-gem 'sqlite3'
-gem 'json'
+gem 'aws-s3', :require => 'aws/s3'
 gem 'chronic'
+gem 'json'
+gem 'nokogiri'
+gem 'rails'
+gem "rake", "0.8.7"
+
+gem 'sqlite3'
 
 # jquery
 gem 'jquery-rails'
 
-gem 'nokogiri'
-gem 'aws-s3', :require => 'aws/s3'
-
 # For auth
-gem 'devise'
 gem 'cancan'
+gem 'devise'
 
 # For item tree
 gem 'ancestry'
 
 # For development.
-gem 'webrat'
+gem 'faker'
 gem 'heroku'
 gem 'timecop'
-gem 'faker'
+gem 'webrat'
