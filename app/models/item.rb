@@ -68,6 +68,10 @@ class Item < ActiveRecord::Base
    # from another item.
    # TODO: Cache!
    def distance item
+      if !item.is_a? Item
+         raise "Cannot calculate distance to object that is not an item."
+      end
+
       disance = 0 if self == item
       id = ItemDistance.where({
          :item1_id => self.id,
@@ -87,7 +91,7 @@ class Item < ActiveRecord::Base
       if distance.nil?
          # this in reality is supposed to be sum(each dimmension (b-a)^2) but
          # because the values are all one or zero, we can do this
-         diff = (self.voters.to_set - item.voters.keys.to_set).count
+         diff = (self.voters.to_set - item.voters.to_set).count
          distance = Math.sqrt(diff)
 
          id.distance = distance

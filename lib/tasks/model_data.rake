@@ -46,11 +46,11 @@ namespace :data do
       (1..3).each do |i|
          puts "\nDay #{i} - #{Time.now}"
 
-         # have users look at posts since they were last online
+         # have users post items since they were last online
          User.find(:all, :limit => 200, :order => "random()").each do |user|
             topics = JSON.parse(user.about)
 
-            topics.sample(2).each do |topic|
+            topics.sample(5).each do |topic|
                uuid = (0..10).collect { (i = Kernel.rand(62); i += ((i < 10) ? 48 : ((i < 36) ? 55 : 61 ))).chr }.join
                params = {
                   :user_id => user.id,
@@ -69,7 +69,7 @@ namespace :data do
 
             voteCount = 0
             posts.each do |post|
-               if voteCount <= 50 and !post.user_voted? user
+               if voteCount <= 25 and !post.user_voted? user
                   topics.each do |t|
                      if !%r{http://#{t}\.com/.*}.match(post.url).nil?
                         post.vote 'up', user

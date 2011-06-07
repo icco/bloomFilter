@@ -7,16 +7,16 @@ namespace :data do
       items = Item.find_by_sql("SELECT * FROM items WHERE id in (SELECT item_id FROM votes GROUP BY item_id HAVING COUNT(*) > 3) ORDER BY RANDOM() LIMIT #{k}")
 
       items.each_index do |i|
-         c = Cluster.find(i)
+         c = Cluster.where(:id => i + 1).first
          c = Cluster.new if c.nil?
-         c.point = item
+         c.point = items[i]
          c.save
       end
 
       # So, this will compute all of the distances and cache them...
-      Cluster.all.each do |point|
+      Cluster.all.each do |cluster|
          Item.all.each do |item|
-            item.distance point
+            item.distance cluster.point
          end
       end
    end
