@@ -13,11 +13,6 @@ namespace :data do
          c.save
       end
 
-      # So, this will compute all of the distances and cache them...
-      Cluster.all.each do |cluster|
-         Item.all.each do |item|
-            item.distance cluster.point
-         end
-      end
+      Cluster.rebuild
    end
 end
