@@ -7,7 +7,11 @@ class Item < ActiveRecord::Base
    has_many :votes
    has_many :comments
 
+   # Creates the voters function for us.
    has_many :voters, :class_name => "User", :through => :votes, :source => :user, :conditions => "direction = 'up'"
+
+   # For k-means
+   belongs_to :cluster
 
    validates_uniqueness_of :url
    after_validation(Item.after_validation, :on => :create)
@@ -95,6 +99,9 @@ class Item < ActiveRecord::Base
 
    # TODO: Cache!
    def similar
+      # Alright, so we need to pick k number of random points in the n-dimensional space.
+      # We then need to pick
+      # http://en.wikipedia.org/wiki/K-means_clustering#Standard_algorithm
 
 
    end
