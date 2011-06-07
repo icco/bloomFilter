@@ -99,9 +99,13 @@ class Item < ActiveRecord::Base
 
    # TODO: Cache!
    def similar
-      # Alright, so we need to pick k number of random points in the n-dimensional space.
-      # We then need to pick
       # http://en.wikipedia.org/wiki/K-means_clustering#Standard_algorithm
+      #
+      # 1) Associate each item with a cluster (The one it's closest to?)
+      # 2) Take the centroid of the items associated with each cluster (Which will no longer be a real point...)
+      # 3) Repeat.
+      #
+      # Centroid is found by doing some matrix addition / division : items.each.likes.each user => count hashtable
 
 
    end
