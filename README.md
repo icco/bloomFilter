@@ -2,9 +2,9 @@
 
 I was reading [Al3x's post][], and I was all, "hey, that would be fun to implement." So, here I am, attempting to learn rails and implement a basic version of what Al3x was proposing.
 
-First I need to learn rails. It seems pretty straight forward, but I'm going to go through [Rails For Zombies][] first, just for shits and giggles.
+I ended up taking a quarter and doing some work on this. Still no where near complete, but it allowed me to do some interesting research into collaborative filtering and data clustering. You can read [my disjointed notes][notes] if you like.
 
-Alright, Rails "learned".
+## Features / Brainstorming
 
 There seems to be a pretty heavy debate on notHn whether or not to allow voting. I think a system along the lines of the following might work:
 
@@ -19,13 +19,6 @@ Another suggestion is that a user could follow other users:
    * side note, dude sounds crazy smart.
 
 Monetization? I'm thinking of using the same pay system that [pinboard.in][] uses. It seems to work, although I might put a ceiling on it...
-
-[Rails For Zombies]: http://railsforzombies.org
-[Al3x's Post]: http://al3x.net/2011/02/22/solving-the-hacker-news-problem.html
-[pinboard.in]: http://pinboard.in/about/
-[Petar Maymounkov]: http://popalg.org/curated-by-choice-part-1
-
-## Features / Brainstorming
 
  * moderators
  * invite only?
@@ -54,3 +47,8 @@ Monetization? I'm thinking of using the same pay system that [pinboard.in][] use
    * direction will probably be an enum `{ 0 => flag, 1 => promote }`
       * What's the best way to deal with enums in rails?
 
+[Rails For Zombies]: http://railsforzombies.org
+[Al3x's Post]: http://al3x.net/2011/02/22/solving-the-hacker-news-problem.html
+[pinboard.in]: http://pinboard.in/about/
+[Petar Maymounkov]: http://popalg.org/curated-by-choice-part-1
+[notes]: https://gist.github.com/867625#file_notes.md
