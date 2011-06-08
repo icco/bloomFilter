@@ -8,10 +8,9 @@ class HomeController < ApplicationController
 
          @items = []
          likes.each do |like|
-            ids = ItemDistance.where(:item1_id => like.id).order("distance DESC").limit(10)
-            ids.each do |id|
-               if !id.item2.user_voted? current_user
-                  @items.push id.item2
+            like.similar.each do |item|
+               if !item.user_voted? current_user
+                  @items.push item
                end
             end
          end

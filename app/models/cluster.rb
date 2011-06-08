@@ -20,8 +20,6 @@ class Cluster < ActiveRecord::Base
       # 1) Associate each item with a cluster (The one it's closest to?)
       # 2) Take the centroid of the items associated with each cluster (Which will no longer be a real point...)
       # 3) Repeat.
-      #
-      # Centroid is found by doing some matrix addition / division : items.each.likes.each user => count hashtable
 
       Cluster.all.each do |cluster|
 
@@ -33,7 +31,7 @@ class Cluster < ActiveRecord::Base
          end
 
          # Take the centroid
-         sum_vector = Array.new(User.count, 0)
+         sum_vector = Array.new(User.count, 0.0)
          cluster.items.each do |item|
             item.votes.select("user_id").each do |v|
                sum_vector[v.user_id] = 0 if sum_vector[v.user_id].nil?
@@ -44,8 +42,6 @@ class Cluster < ActiveRecord::Base
          sum_vector.map! do |count|
             count / sum_vector.size
          end
-
-         p sum_vector
 
          # Set that as the new cluster
 

@@ -109,6 +109,6 @@ class Item < ActiveRecord::Base
          self.cluster = Cluster.closest(self)
       end
 
-      return Item.where(:cluster => self.cluster).order("created_at DESC")
+      return Item.where(:cluster_id => self.cluster.id).order("created_at DESC").limit(25)
    end
 end
