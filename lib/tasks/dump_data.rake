@@ -1,4 +1,3 @@
-
 namespace :data do
    desc "Dump our data for VW."
    task :dump => :environment do
@@ -13,9 +12,10 @@ namespace :data do
       variance = Math.variance(pop)
       std_dev = Math.standard_deviation(pop)
 
-      puts "Population: #{pop.count}"
-      puts "Mean:       #{Math.mean pop}"
-      puts "Variance:   #{variance}"
-      puts "Std dev:    #{std_dev}"
+      puts " -- Votes Data"
+      puts "Population (# of votes): #{pop.count}"
+      puts "Mean (avg # of votes):   #{Math.mean pop}"
+      puts "Variance:                #{variance}"
+      puts "Standard Deviation:      #{std_dev}"
    end
 end
