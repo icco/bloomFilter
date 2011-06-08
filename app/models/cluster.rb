@@ -20,9 +20,7 @@ class Cluster < ActiveRecord::Base
       # 1) Associate each item with a cluster (The one it's closest to?)
       # 2) Take the centroid of the items associated with each cluster (Which will no longer be a real point...)
       # 3) Repeat.
-
       Cluster.all.each do |cluster|
-
          if cluster.items.count == 0
             Item.limit(100).each do |item|
                item.cluster = Cluster.closest(item)
@@ -43,8 +41,8 @@ class Cluster < ActiveRecord::Base
             count / sum_vector.size
          end
 
-         # Set that as the new cluster
-
+         # Set the nearest item to the centroid as the new cluster
+         cluster.point = Item.from_vector sum_vector
       end
 
       return true

@@ -111,4 +111,32 @@ class Item < ActiveRecord::Base
 
       return Item.where(:cluster_id => self.cluster.id).order("created_at DESC").limit(25)
    end
+
+   # Takes in a column vector matching userids to whether or not they voted. We
+   # try and find an item similar to that.
+   def Item.from_vector vector
+      item_hash = {}
+      item_hash.default = 0
+
+      vector.each_index do |userid|
+         if vector[userid] > 0
+            User.find(userid).likes.select('item_id').each do |like|
+               item_hash[like.id] += 1
+            end
+         end
+      end
+
+      most_common_item = 0
+
+      item_hash.each_pair do |k,v|
+         if item_hash[most_common_item] < v
+            most_common_item = k
+         end
+      end
+
+      item = nil
+      item = Item.find(most_common_item) if most_common_item > 0
+
+      return item
+   end
 end
