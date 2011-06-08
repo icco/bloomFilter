@@ -2,22 +2,17 @@
 <%= render :partial => 'items/item', :locals => { :item => @item } %>
 </table>
 
-<% if @item.text != ""%>
-<p>
-  <%= @item.text %>
-</p>
+<% if @item.votes.size > 0 %>
+   <ul style="margin: 0; padding: 0;">
+      <li style="margin: 0; padding: 2px; display: inline; list-style: none;" >Voters: </li>
+      <% @item.votes.each do |vote| %>
+         <li style="margin: 0; padding: 2px; display: inline; list-style: none;" ><%= link_to vote.user.username, vote.user %></li>
+      <% end %>
+   </ul>
 <% end %>
-
-Voters: <% @item.votes.each do |vote| %>
-      <li style="margin: 0; padding: 2px; display: inline; list-style: none;" ><%= link_to vote.user.username, vote.user %></li>
-   <% end %>
 
 <p>
 <hr />
 </p>
 
 <%= render 'comments' %>
-
-<% if @item.user == current_user %>
-   <%= link_to 'Edit', edit_item_path(@item) %> |
-<% end %>

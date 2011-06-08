@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110607053824) do
+ActiveRecord::Schema.define(:version => 20110608205328) do
 
   create_table "clusters", :force => true do |t|
     t.integer  "item_id"
@@ -40,7 +40,6 @@ ActiveRecord::Schema.define(:version => 20110607053824) do
   create_table "items", :force => true do |t|
     t.string   "url"
     t.string   "title"
-    t.text     "text"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"

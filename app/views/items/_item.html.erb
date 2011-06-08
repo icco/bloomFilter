@@ -9,8 +9,7 @@
    <td><%= item.votes.count %></td>
    <td class="item_meta">
       <%= link_to "#{item.comments.count} Comments", item %> &middot;
-      by <%= link_to item.user.username, item.user %> &middot;
-      <%= item.updated_at.time_since %> &middot;
+      by <%= link_to item.user.username, item.user %> <%= item.updated_at.time_since %> &middot;
       <%= if item.user_flagged?(current_user) then 'Flagged' else link_to 'Flag', vote_flag_path(item) end %>
       <% if item.user == current_user %>
          &middot;
