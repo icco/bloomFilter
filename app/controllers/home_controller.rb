@@ -15,7 +15,7 @@ class HomeController < ApplicationController
             end
          end
 
-         @items = @items.sort {|a,b| b.created_at <=> a.created_at }
+         #@items = @items.sort {|a,b| b.created_at <=> a.created_at }
          @items = @items.slice(0..25)
 
          if @items.count < 25
