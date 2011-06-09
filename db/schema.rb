@@ -10,10 +10,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110608205328) do
+ActiveRecord::Schema.define(:version => 20110609175851) do
+
+  create_table "centroids", :force => true do |t|
+    t.integer  "cluster_id"
+    t.integer  "user_id"
+    t.float    "average"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "clusters", :force => true do |t|
-    t.integer  "item_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

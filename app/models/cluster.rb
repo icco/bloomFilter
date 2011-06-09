@@ -1,12 +1,22 @@
 class Cluster < ActiveRecord::Base
    has_many :items
-   belongs_to :point, :class_name => 'Item', :foreign_key => 'item_id'
+   has_many :centroids, :order => "user_id ASC"
+
+   def distance item
+      dist = 0.0
+      self.centroids.each do |centroid|
+         val = item.user_voted?(centroid.user) ? 1 : 0
+         dist += ((centroid.average - val) ** 2)
+      end
+
+      return Math.sqrt dist
+   end
 
    def Cluster.closest item
       closest = nil
       Cluster.all.each do |cluster|
-         d = cluster.point.distance item
-         if closest.nil? or d < closest.point.distance(item)
+         d = cluster.distance item
+         if closest.nil? or d < closest.distance(item)
             closest = cluster
          end
       end
@@ -22,27 +32,29 @@ class Cluster < ActiveRecord::Base
       # 3) Repeat.
       Cluster.all.each do |cluster|
          if cluster.items.count == 0
-            Item.limit(100).each do |item|
+            Item.limit(10).each do |item|
                item.cluster = Cluster.closest(item)
                item.save
             end
          end
 
          # Take the centroid
-         sum_vector = Array.new(User.count, 0.0)
+         sum_vector = Hash.new
+         sum_vector.default = 0.0
+
          cluster.items.each do |item|
-            item.votes.select("user_id").each do |v|
-               sum_vector[v.user_id] = 0 if sum_vector[v.user_id].nil?
-               sum_vector[v.user_id] = sum_vector[v.user_id] + 1
+            item.votes.group('user_id').count.each do |userid, count|
+               sum_vector[userid] = count
             end
          end
 
-         sum_vector.map! do |count|
-            count / sum_vector.size
+         sum_vector = sum_vector.map do |key, count|
+            [key, (count / cluster.items.count)]
          end
 
-         # Set the nearest item to the centroid as the new cluster
-         cluster.point = Item.from_vector sum_vector
+         sum_vector.each do |user, avg|
+            Centroid.factory(cluster, user, avg) if avg > 0
+         end
       end
 
       return true

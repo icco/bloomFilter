@@ -9,8 +9,9 @@ namespace :data do
       items.each_index do |i|
          c = Cluster.where(:id => i + 1).first
          c = Cluster.new if c.nil?
-         c.point = items[i]
          c.save
+
+         Centroid.factory c, User.find(i+1), 1
       end
 
       Cluster.rebuild
