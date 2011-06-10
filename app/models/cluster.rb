@@ -9,7 +9,9 @@ class Cluster < ActiveRecord::Base
          dist += ((centroid.average - val) ** 2)
       end
 
-      return Math.sqrt dist
+      dist = Math.sqrt(dist)
+
+      return dist
    end
 
    def Cluster.closest item

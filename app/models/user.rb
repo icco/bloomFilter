@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
 
       items = []
       likes.each do |like|
-         like.similar.each do |item|
+         like.similar(5).each do |item|
             if !item.user_voted? self
                items.push item
             end
@@ -25,15 +25,9 @@ class User < ActiveRecord::Base
       end
 
       items = items.sort {|a,b| b.created_at <=> a.created_at }
-      items = items.slice(0..25)
 
       if items.count < 25
          items = items.concat(Item.order("created_at DESC").limit(25-items.count()))
-      end
-
-      items.each do |item|
-         item.cluster = Cluster.closest(item)
-         item.save
       end
 
       return items

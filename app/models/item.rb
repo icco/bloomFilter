@@ -112,13 +112,12 @@ class Item < ActiveRecord::Base
 
    # TODO: Cache!
    # Uses clustering to find similar posts.
-   def similar
+   def similar(count = 25)
       if self.cluster.nil? or (Time.now - self.cluster.updated_at) > (60*60)
-         Cluster.rebuild
          self.cluster = Cluster.closest(self)
       end
 
-      return Item.where(:cluster_id => self.cluster.id).order("created_at DESC").limit(25)
+      return Item.where(:cluster_id => self.cluster.id).order("created_at DESC").limit(count)
    end
 
    # Takes in a column vector matching userids to whether or not they voted. We

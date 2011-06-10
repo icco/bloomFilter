@@ -11,6 +11,12 @@ namespace :data do
          Centroid.factory c, User.find(i+1), 1
       end
 
-      (0..5).each {|i| Cluster.rebuild }
+      (0..5).each do |i|
+         Cluster.rebuild
+         Item.where(:cluster_id => nil).limit(100).each do |item|
+            item.cluster = Cluster.closest(item)
+            item.save
+         end
+      end
    end
 end
