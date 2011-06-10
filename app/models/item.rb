@@ -24,6 +24,15 @@ class Item < ActiveRecord::Base
       end
    end
 
+   def cluster
+      if self.cluster_id.nil?
+         self.cluster_id = Cluster.closest(self).id
+         self.save
+      end
+
+      return Cluster.find(self.cluster_id)
+   end
+
    def base_uri
       item_path(self)
    end

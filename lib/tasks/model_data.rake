@@ -16,7 +16,7 @@ namespace :data do
       topics = (0..100).to_a
 
       # First build users
-      (0..1000).each do |i|
+      (0..100).each do |i|
          p = {
             "username" => Faker::Internet.user_name,
             "email" => Faker::Internet.email,
@@ -47,7 +47,7 @@ namespace :data do
          puts "\nDay #{i} - #{Time.now}"
 
          # have users post items since they were last online
-         User.find(:all, :limit => 200, :order => "random()").each do |user|
+         User.find(:all, :order => "random()").each do |user|
             topics = JSON.parse(user.about)
 
             topics.sample(5).each do |topic|
